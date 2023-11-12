@@ -10,4 +10,5 @@ public class PicpaysimplificadoApplication {
 		SpringApplication.run(PicpaysimplificadoApplication.class, args);
 	}
 
+
 }

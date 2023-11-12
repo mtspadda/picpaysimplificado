@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name="transaction")
+@Entity
 @Table(name="transaction")
 @Setter
 @Getter
@@ -22,6 +22,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "amount")
     private BigDecimal amount;
 
     @ManyToOne
@@ -32,6 +33,7 @@ public class Transaction {
     @JoinColumn(name="receiver_id")
     private User receiver;
 
+    @Column(name="time_stamp")
     private LocalDateTime timeStamp;
 
 }

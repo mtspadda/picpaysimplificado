@@ -3,7 +3,6 @@ package com.picpaysimplificado.services;
 import com.picpaysimplificado.model.user.User;
 import com.picpaysimplificado.model.user.UserType;
 import com.picpaysimplificado.repository.UserRepository;
-import org.hibernate.sql.exec.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +23,14 @@ public class UserService {
         if (sender.getBalance().compareTo(amount) > 0){
             throw new Exception("insufficient funds.");
         }
+    }
+
+    public User findUserById(Long id) throws Exception {
+        return this.repository.findUserById(id).orElseThrow(()->
+                new Exception("User not found!"));
+    }
+
+    public void saveUser(User user){
+        this.repository.save(user);
     }
 }
