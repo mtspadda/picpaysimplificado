@@ -2,27 +2,28 @@ package com.picpaysimplificado.model.transaction;
 
 import com.picpaysimplificado.model.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="transaction")
-@Setter
-@Getter
-@AllArgsConstructor
-@EqualsAndHashCode(of="id")
-public class Transaction {
+public class Transaction implements Serializable {
+
+    public Transaction(Long id, BigDecimal amount, User sender, User receiver, LocalDateTime timeStamp) {
+        this.id = id;
+        this.amount = amount;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.timeStamp = timeStamp;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "amount")
     private BigDecimal amount;
 
     @ManyToOne
@@ -33,7 +34,42 @@ public class Transaction {
     @JoinColumn(name="receiver_id")
     private User receiver;
 
-    @Column(name="time_stamp")
     private LocalDateTime timeStamp;
 
+    public Long getId() {
+        return id;
+    }
+
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+    }
+
+    public LocalDateTime getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(LocalDateTime timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 }
