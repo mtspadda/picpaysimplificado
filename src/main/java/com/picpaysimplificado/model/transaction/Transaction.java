@@ -2,6 +2,10 @@ package com.picpaysimplificado.model.transaction;
 
 import com.picpaysimplificado.model.user.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import java.io.Serializable;
@@ -10,15 +14,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="transaction")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Transaction implements Serializable {
-
-    public Transaction(Long id, BigDecimal amount, User sender, User receiver, LocalDateTime timeStamp) {
-        this.id = id;
-        this.amount = amount;
-        this.sender = sender;
-        this.receiver = receiver;
-        this.timeStamp = timeStamp;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,40 +36,4 @@ public class Transaction implements Serializable {
 
     private LocalDateTime timeStamp;
 
-    public Long getId() {
-        return id;
-    }
-
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public User getSender() {
-        return sender;
-    }
-
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
-    public User getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
-    }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
 }
