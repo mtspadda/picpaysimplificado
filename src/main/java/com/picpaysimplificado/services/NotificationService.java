@@ -27,6 +27,8 @@ public class NotificationService {
             System.out.println("Error for send notifcation");
             throw new Exception("Service offline.");
         }
+
+        System.out.println("Notification sent!")
     }
 
 }
