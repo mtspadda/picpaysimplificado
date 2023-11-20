@@ -25,9 +25,12 @@ public class TransactionService {
     public UserService userService;
 
     @Autowired
+    public NotificationService notificationService;
+
+    @Autowired
     private RestTemplate restTemplate;
 
-    public void createTransaction(TransactionDTO transactionDTO) throws Exception {
+    public Transaction createTransaction(TransactionDTO transactionDTO) throws Exception {
         User sender = this.userService.findUserById(transactionDTO.senderId());
         User receiver = this.userService.findUserById(transactionDTO.receiverId());
 
@@ -48,6 +51,12 @@ public class TransactionService {
         this.transactionRepository.save(newTransaction);
         this.userService.saveUser(sender);
         this.userService.saveUser(receiver);
+
+        this.notificationService.sendNotification(sender, "Transaction success");
+
+        this.notificationService.sendNotification(receiver, "Transaction success");
+
+        return new Transaction();
     }
 
     public boolean authorizeTransaction(User sender, BigDecimal amount){

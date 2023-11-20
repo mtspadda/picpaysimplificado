@@ -1,5 +1,6 @@
 package com.picpaysimplificado.model.transaction;
 
+import com.picpaysimplificado.dto.TransactionDTO;
 import com.picpaysimplificado.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
