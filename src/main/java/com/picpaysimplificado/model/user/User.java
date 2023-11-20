@@ -1,10 +1,8 @@
 package com.picpaysimplificado.model.user;
 
+import com.picpaysimplificado.dto.UserDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of="id")
 public class User{
 
@@ -37,4 +36,13 @@ public class User{
 
     private UserType userType;
 
+    public User(UserDto userDto){
+        this.firstName = userDto.firstName();
+        this.lastName = userDto.lastName();
+        this.balance = userDto.balance();
+        this.password = userDto.password();
+        this.email = userDto.email();
+        this.document = userDto.document();
+        this.userType = userDto.userType();
+    }
 }
