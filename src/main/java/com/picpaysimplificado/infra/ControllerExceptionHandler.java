@@ -1,6 +1,6 @@
 package com.picpaysimplificado.infra;
 
-import com.picpaysimplificado.dto.ExceptionDto;
+import com.picpaysimplificado.dto.ExceptionDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -12,18 +12,18 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity threatDuplicateEntry(DataIntegrityViolationException exception){
-        ExceptionDto exceptionDto = new ExceptionDto("User already created", "400");
+        ExceptionDTO exceptionDto = new ExceptionDTO("User already created", "400");
         return ResponseEntity.badRequest().body(exceptionDto);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity threat404(EntityNotFoundException exception){;
         return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity threatGeneralException(Exception exception){
-        ExceptionDto exceptionDto = new ExceptionDto(exception.getMessage(), "500");
+        ExceptionDTO exceptionDto = new ExceptionDTO(exception.getMessage(), "500");
         return ResponseEntity.internalServerError().body(exceptionDto);
     }
 }

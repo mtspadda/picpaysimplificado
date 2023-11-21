@@ -18,11 +18,9 @@ public class NotificationService {
 
     public void sendNotification(User user, String message) throws Exception {
         String email = user.getEmail();
-
         NotificationDTO notificationRequest = new NotificationDTO(email, message);
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(ULR_REQUEST, notificationRequest, String.class);
-
         if (!(responseEntity.getStatusCode() == HttpStatus.OK)) {
             System.out.println("Error for send notifcation");
             throw new Exception("Service offline.");
